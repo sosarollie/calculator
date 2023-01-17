@@ -8,7 +8,10 @@ button {
 }
 
 #display {
+    padding: 5px;
+    word-wrap: break-word;
     border: 1px solid grey;
     height: 80px;
+    width: 150px;
     margin: 10px;
 }

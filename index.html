@@ -10,14 +10,14 @@
 </head>
 <body>
     <div class="grid">
-        <div id="display">1241419401401249124</div>
+        <div id="display">0</div>
         <div class="operators">
-            <button onclick="operate(1, 2, 3)">+</button>
-            <button onclick="operate(2, 2, 3)">-</button>
-            <button onclick="operate(3, 2, 3)">*</button>
-            <button onclick="operate(4, 2, 3)">/</button>
-            <button >=</button>
-            <button >AC</button>
+            <button onclick="populateDisplay('+')">+</button>
+            <button onclick="populateDisplay('-')">-</button>
+            <button onclick="populateDisplay('*')">*</button>
+            <button onclick="populateDisplay('/')">/</button>
+            <button id="equals">=</button>
+            <button onclick="clearDisplay()">AC</button>
         </div>
         <div class="numbers">
             <button>0</button>
