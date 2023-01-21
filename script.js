@@ -2,8 +2,9 @@ const display = document.querySelector('#display');
 
 let currentValue = "";
 let currentOperator;
+let nextOperator;
 let previousValue = "";
-let erasePreviousValue = false;
+let eraseCurrentValue = false;
 
 
 function populateDisplay (currentValue){
@@ -16,8 +17,8 @@ const numbers = document.querySelectorAll('.number');
 
 numbers.forEach(number => {
     number.addEventListener("click", n => {
-        if (erasePreviousValue == true) {
-            erasePreviousValue = false;
+        if (eraseCurrentValue == true) {
+            eraseCurrentValue = false;
             currentValue = "";
         }
         let digit = (n.target.textContent);
@@ -32,11 +33,14 @@ const operators = document.querySelectorAll('.operator');
 
 operators.forEach(operator => {
     operator.addEventListener("click", o => {
+        if (previousValue != "" && currentValue != ""){
+            operate();
+        }
         currentOperator = o.target.textContent;
+        eraseCurrentValue = true;
         if (previousValue == "") {
             previousValue = currentValue;
-        }
-        erasePreviousValue = true;
+        };
     });
 });
 
@@ -66,7 +70,9 @@ function clearDisplay(){
 const equals = document.querySelector('#equals');
 
 equals.addEventListener('click', () => {
-    operate();
+    if (previousValue != "" && currentValue != ""){
+        operate();
+    }
 });
 
 function operate(){
@@ -88,7 +94,7 @@ function operate(){
      };
      console.log(total);
      console.log(typeof total);
-     previousValue = "";
      currentValue = "";
+     previousValue = total;
      populateDisplay(total);
 };
