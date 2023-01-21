@@ -19,7 +19,6 @@ numbers.forEach(number => {
         if (erasePreviousValue == true) {
             erasePreviousValue = false;
             currentValue = "";
-            clearDisplay();
         }
         let digit = (n.target.textContent);
         currentValue += digit;
@@ -42,39 +41,54 @@ operators.forEach(operator => {
 });
 
 function add(a, b){
-    return a + b;
+    return Number(a) + Number(b);
 };
 
 function subtract(a, b){
-    return a - b;
+    return Number(a) - Number(b);
 };
 
 function divide(a, b){
-    return a / b;
+    return Number(a) / Number(b);
 };
 
 function multiply(a, b){
-    return a * b;
+    return Number(a) * Number(b);
 };
 
 function clearDisplay(){
     display.textContent = " ";
+    currentValue = "";
+    previousValue = "";
     populateDisplay(0);
 }
 
+const equals = document.querySelector('#equals');
+
+equals.addEventListener('click', () => {
+    operate();
+});
+
 function operate(){
     let total;
+    console.log(currentOperator);
     switch (currentOperator) {
         case '+':
             total = add(previousValue, currentValue);
+            break
         case '-':
             total = subtract(previousValue, currentValue);
+            break
         case '/':
-            total = divide(previousValue, currentValue);                    
+            total = divide(previousValue, currentValue);
+            break                    
         case '*':
             total = multiply(previousValue, currentValue);
+            break
      };
-     previousValue = total;
-     clearDisplay();
+     console.log(total);
+     console.log(typeof total);
+     previousValue = "";
+     currentValue = "";
      populateDisplay(total);
 };
