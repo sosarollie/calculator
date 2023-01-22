@@ -53,6 +53,10 @@ function subtract(a, b){
 };
 
 function divide(a, b){
+    if (b == "0") {
+        clearDisplay();
+        return display.textContent = 'Error! Cannot divide by 0';
+    }
     return Number(a) / Number(b);
 };
 
