@@ -10,9 +10,9 @@ const deleteBtn = document.querySelector('#delete');
 
 deleteBtn.addEventListener("click", () => {
     if (currentValue != 0) {
-    currentValue = currentValue.slice(0, -1);
-    populateDisplay(currentValue);
-    console.log(currentValue);
+        currentValue = currentValue.slice(0, -1);
+        populateDisplay(currentValue);
+        console.log(currentValue);
     }
 });
 
@@ -117,8 +117,10 @@ function operate(){
             total = mod(previousValue, currentValue);
             break    
      };
-     console.log(total);
-     console.log(typeof total);
+     total = Math.round((total + Number.EPSILON) * 100) / 100;
+     if (total > 10000000) {
+        total.toExponential();
+     };
      currentValue = "";
      previousValue = total;
      populateDisplay(total);
