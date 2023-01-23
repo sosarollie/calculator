@@ -1,9 +1,9 @@
 body {
+    margin-top: 100px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     min-height: 100vh;
-
 }
 
 #calculator {
@@ -17,43 +17,34 @@ body {
 }
 
 button {
-    font-size: 20px;
-    padding: 20px;
+    font-size: 25px;
+    border: 1px solid grey;
+    border-radius: 50%;
 }
 
-#buttonsDelete {
-    margin: 10px;
-    display: flex;
-    justify-content: space-around;
+#equals {
+    grid-column-start: span 2;
+    border-radius: 2em;
 }
 
 .buttons {
-    display: flex;
-    max-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(4, 80px);
+    grid-template-rows: repeat(5, 80px);
+    gap: 10px;
+    height: 50px;
+    width: 400px;
     margin: 10px;
 }
 
-#zero{
-    flex-grow: 1;
-}
-
-.numbers {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    width: 250px;
-    height: 200px;
-}
-
-.operators {
-    display: flex;
-    flex-direction: column;
-}
-
 #display {
+    font-size: 20px;
+    text-align: right;
     padding: 5px;
+    width: 350px;
+    margin-left: 5px;
     word-wrap: break-word;
     border: 1px solid grey;
-    height: 150px;
-    width: 280px;
+    min-height: 70px;
+    border-radius: 1em;
 }

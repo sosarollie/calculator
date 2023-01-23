@@ -6,6 +6,29 @@ let nextOperator;
 let previousValue = "";
 let eraseCurrentValue = false;
 
+const deleteBtn = document.querySelector('#delete');
+
+deleteBtn.addEventListener("click", () => {
+    if (currentValue != 0) {
+    currentValue = currentValue.slice(0, -1);
+    populateDisplay(currentValue);
+    console.log(currentValue);
+    }
+});
+
+const equals = document.querySelector('#equals');
+
+equals.addEventListener('click', () => {
+    if (previousValue != "" && currentValue != ""){
+        operate();
+    }
+});
+
+const dot = document.querySelector('#dot');
+
+deleteBtn.addEventListener("click", () => {
+    currentValue += '.';
+});
 
 function populateDisplay (currentValue){
     if (display.textContent == "0" || display.textContent == 0)
@@ -27,7 +50,6 @@ numbers.forEach(number => {
         populateDisplay(currentValue);
         });
 });
-
 
 const operators = document.querySelectorAll('.operator');
 
@@ -64,20 +86,16 @@ function multiply(a, b){
     return Number(a) * Number(b);
 };
 
+function mod(a, b){
+    return Number(a) % Number(b);
+};
+
 function clearDisplay(){
     display.textContent = " ";
     currentValue = "";
     previousValue = "";
     populateDisplay(0);
 }
-
-const equals = document.querySelector('#equals');
-
-equals.addEventListener('click', () => {
-    if (previousValue != "" && currentValue != ""){
-        operate();
-    }
-});
 
 function operate(){
     let total;
@@ -95,6 +113,9 @@ function operate(){
         case '*':
             total = multiply(previousValue, currentValue);
             break
+        case '%':
+            total = mod(previousValue, currentValue);
+            break    
      };
      console.log(total);
      console.log(typeof total);
