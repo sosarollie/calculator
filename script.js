@@ -2,14 +2,16 @@ const display = document.querySelector('#display');
 
 let currentValue = "";
 let currentOperator;
-let nextOperator;
 let previousValue = "";
 let eraseCurrentValue = false;
 
 const deleteBtn = document.querySelector('#delete');
 
 deleteBtn.addEventListener("click", () => {
-    if (currentValue != 0) {
+    console.log(currentValue);
+    if (currentValue.length == 0){
+        currentValue = "0";
+    }else if (currentValue != "0") {
         currentValue = currentValue.slice(0, -1);
         populateDisplay(currentValue);
         console.log(currentValue);
@@ -26,7 +28,7 @@ equals.addEventListener('click', () => {
 
 const dot = document.querySelector('#dot');
 
-deleteBtn.addEventListener("click", () => {
+dot.addEventListener("click", () => {
     currentValue += '.';
 });
 
@@ -34,6 +36,7 @@ function populateDisplay (currentValue){
     if (display.textContent == "0" || display.textContent == 0)
         display.textContent = " ";
     display.textContent = currentValue;
+    console.log(typeof currentValue);
 }
 
 const numbers = document.querySelectorAll('.number');
@@ -93,8 +96,8 @@ function mod(a, b){
 function clearDisplay(){
     display.textContent = " ";
     currentValue = "";
-    previousValue = "";
-    populateDisplay(0);
+    previousValue = "0";
+    populateDisplay("0");
 }
 
 function operate(){
