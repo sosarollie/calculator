@@ -8,9 +8,10 @@ let eraseCurrentValue = false;
 const deleteBtn = document.querySelector('#delete');
 
 deleteBtn.addEventListener("click", () => {
-    console.log(currentValue);
-    if (currentValue.length == 0){
+    console.log(currentValue.length);
+    if (currentValue.length == 0 || currentValue.length == 1){
         currentValue = "0";
+        populateDisplay(currentValue);
     }else if (currentValue != "0") {
         currentValue = currentValue.slice(0, -1);
         populateDisplay(currentValue);
