@@ -1,14 +1,25 @@
+@font-face { font-family: Calculator; 
+    src: url('./fonts/Calculator.ttf'); } 
+
 body {
     margin-top: 100px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
+    font-family: -apple-system;
     min-height: 100vh;
 }
 
 #calculator {
+    height: 550px;
+    padding: 15px;
+    width: 373px;
+    margin-bottom: 40px;
+    background-color: #333232;
     display: flex;
     flex-direction: column;
+    box-shadow: 0 9px #999;
+    border-radius: 2em;
 }
 
 * {
@@ -17,12 +28,67 @@ body {
 }
 
 button {
+    font-family: -apple-system;
     font-size: 25px;
+    color: white;
     border: 1px solid grey;
     border-radius: 50%;
+    box-shadow: 0 6px #999;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.726);
+    color: rgba(20, 20, 20, 0.699);
+}
+
+button:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.number {
+    background-color: #505050;
+}
+
+.number:active {
+    background-color:  #CDF7B5;
+}
+
+.operator {
+    background-color: rgba(6, 236, 140, 0.877);
+}
+
+.operator:active {
+    background-color: #A3EE9B;
+}
+
+#dot {
+    background-color: #505050;
+}
+
+#dot:active {
+    background-color:  #CDF7B5;
+}
+
+#dot:hover {
+    background-color: rgba(255, 255, 255, 0.726);
+    color: rgba(20, 20, 20, 0.699);
+}
+
+#AC, #delete {
+    background-color: #d4d4d2;
+}
+
+#AC:active, #delete:active {
+    background-color: #FF6962
+}
+
+#equals:active {
+    background-color: #A3EE9B;
 }
 
 #equals {
+    background-color: rgba(0, 255, 149, 0.877);
     grid-column-start: span 2;
     border-radius: 2em;
 }
@@ -32,17 +98,21 @@ button {
     grid-template-columns: repeat(4, 80px);
     grid-template-rows: repeat(5, 80px);
     gap: 10px;
-    height: 50px;
+    height: 400px;
     width: 400px;
     margin: 10px;
 }
-
+ 
 #display {
-    font-size: 50px;
+    font-size: 56px;
+    overflow:-moz-hidden-unscrollable;
     text-align: right;
-    padding: 5px;
+    padding: 8px;
+    padding-top: 15px;
     width: 350px;
+    height: 1px;
     margin-left: 5px;
+    background-color: white;
     word-wrap: break-word;
     border: 1px solid grey;
     min-height: 70px;

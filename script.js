@@ -10,8 +10,7 @@ const deleteBtn = document.querySelector('#delete');
 deleteBtn.addEventListener("click", () => {
     console.log(currentValue.length);
     if (currentValue.length == 0 || currentValue.length == 1){
-        currentValue = "0";
-        populateDisplay(currentValue);
+        clearDisplay();
     }else if (currentValue != "0") {
         currentValue = currentValue.slice(0, -1);
         populateDisplay(currentValue);
@@ -31,6 +30,8 @@ const dot = document.querySelector('#dot');
 
 dot.addEventListener("click", () => {
     currentValue += '.';
+    populateDisplay(currentValue);
+    dot.disabled = true;
 });
 
 function populateDisplay (currentValue){
@@ -67,6 +68,7 @@ operators.forEach(operator => {
         if (previousValue == "") {
             previousValue = currentValue;
         };
+        dot.disabled = false;
     });
 });
 
@@ -97,7 +99,8 @@ function mod(a, b){
 function clearDisplay(){
     display.textContent = " ";
     currentValue = "";
-    previousValue = "0";
+    previousValue = "";
+    dot.disabled = false;
     populateDisplay("0");
 }
 
@@ -122,9 +125,10 @@ function operate(){
             break    
      };
      total = Math.round((total + Number.EPSILON) * 100) / 100;
-     if (total > 10000000) {
-        total.toExponential();
+     if (total > 1000000) {
+        total.toExponential(10);
      };
+     dot.disabled = false;
      currentValue = "";
      previousValue = total;
      populateDisplay(total);
