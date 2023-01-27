@@ -8,13 +8,11 @@ let eraseCurrentValue = false;
 const deleteBtn = document.querySelector('#delete');
 
 deleteBtn.addEventListener("click", () => {
-    console.log(currentValue.length);
     if (currentValue.length == 0 || currentValue.length == 1){
         clearDisplay();
     }else if (currentValue != "0") {
         currentValue = currentValue.slice(0, -1);
         populateDisplay(currentValue);
-        console.log(currentValue);
     }
 });
 
@@ -38,23 +36,26 @@ function populateDisplay (currentValue){
     if (display.textContent == "0" || display.textContent == 0)
         display.textContent = " ";
     display.textContent = currentValue;
-    console.log(typeof currentValue);
 }
 
 const numbers = document.querySelectorAll('.number');
 
+function addNumber(n){
+    if (eraseCurrentValue == true) {
+        eraseCurrentValue = false;
+        currentValue = "";
+    }
+    let digit = (n);
+    currentValue += digit;
+    populateDisplay(currentValue);
+}
+
 numbers.forEach(number => {
     number.addEventListener("click", n => {
-        if (eraseCurrentValue == true) {
-            eraseCurrentValue = false;
-            currentValue = "";
-        }
-        let digit = (n.target.textContent);
-        currentValue += digit;
-        console.log(currentValue)
-        populateDisplay(currentValue);
-        });
+        addNumber(n.target.textContent);
+    });
 });
+
 
 const operators = document.querySelectorAll('.operator');
 
@@ -106,7 +107,6 @@ function clearDisplay(){
 
 function operate(){
     let total;
-    console.log(currentOperator);
     switch (currentOperator) {
         case '+':
             total = add(previousValue, currentValue);
@@ -133,3 +133,7 @@ function operate(){
      previousValue = total;
      populateDisplay(total);
 };
+
+window.addEventListener('keydown', e =>{
+    addNumber(e.key);
+});
