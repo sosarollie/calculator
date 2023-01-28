@@ -6,17 +6,33 @@ let previousValue = "";
 let eraseCurrentValue = false;
 
 const deleteBtn = document.querySelector('#delete');
+const equals = document.querySelector('#equals');
+const dot = document.querySelector('#dot');
+const numbers = document.querySelectorAll('.number');
+const operators = document.querySelectorAll('.operator');
 
-deleteBtn.addEventListener("click", () => {
+function deleteDigit(){
     if (currentValue.length == 0 || currentValue.length == 1){
         clearDisplay();
     }else if (currentValue != "0") {
         currentValue = currentValue.slice(0, -1);
         populateDisplay(currentValue);
-    }
+    };
+};
+
+function addDot(){
+    currentValue += '.';
+    populateDisplay(currentValue);
+    dot.disabled = true;
+};
+
+dot.addEventListener("click", () => {
+    addDot();
 });
 
-const equals = document.querySelector('#equals');
+deleteBtn.addEventListener("click", () => {
+    deleteDigit();
+});
 
 equals.addEventListener('click', () => {
     if (previousValue != "" && currentValue != ""){
@@ -24,21 +40,11 @@ equals.addEventListener('click', () => {
     }
 });
 
-const dot = document.querySelector('#dot');
-
-dot.addEventListener("click", () => {
-    currentValue += '.';
-    populateDisplay(currentValue);
-    dot.disabled = true;
-});
-
 function populateDisplay (currentValue){
     if (display.textContent == "0" || display.textContent == 0)
         display.textContent = " ";
     display.textContent = currentValue;
 }
-
-const numbers = document.querySelectorAll('.number');
 
 function addNumber(n){
     if (eraseCurrentValue == true) {
@@ -57,19 +63,21 @@ numbers.forEach(number => {
 });
 
 
-const operators = document.querySelectorAll('.operator');
+function addOperator(o){
+    if (previousValue != "" && currentValue != ""){
+        operate();
+    }
+    currentOperator = o;
+    eraseCurrentValue = true;
+    if (previousValue == "") {
+        previousValue = currentValue;
+    };
+    dot.disabled = false;
+}
 
 operators.forEach(operator => {
     operator.addEventListener("click", o => {
-        if (previousValue != "" && currentValue != ""){
-            operate();
-        }
-        currentOperator = o.target.textContent;
-        eraseCurrentValue = true;
-        if (previousValue == "") {
-            previousValue = currentValue;
-        };
-        dot.disabled = false;
+        addOperator(o.target.textContent);
     });
 });
 
@@ -135,5 +143,17 @@ function operate(){
 };
 
 window.addEventListener('keydown', e =>{
-    addNumber(e.key);
+    if (e.key == 'Backspace'){
+        e.preventDefault();
+        deleteDigit();
+    } else if((e.key > -1 && e.key < 10) || (e.key > 95 && e.key < 106)){
+        addNumber(e.key);
+    } else if(e.key == 'Enter'){
+        operate();
+    } else if(e.key == '+' || e.key == '-' || e.key == '/' || e.key == '*' || e.key == '%'){
+        addOperator(e.key);
+    } else if(e.key == '.'){
+        addDot();
+    }
 });
+
